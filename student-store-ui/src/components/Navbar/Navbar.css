@@ -1,0 +1,14 @@
+.navBar {
+    background-color: #2c4047;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.navLinks {
+    color: white;
+    margin: 20px;
+    margin-right: 100px;
+
+}
