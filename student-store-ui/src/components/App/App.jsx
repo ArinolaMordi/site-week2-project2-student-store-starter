@@ -1,10 +1,18 @@
 import React from "react"
-import { BrowserRouter } from 'react-router-dom'
+// import { BrowserRouter } from 'react-router-dom'
 import Navbar from "../Navbar/Navbar"
 import Sidebar from "../Sidebar/Sidebar"
 import Home from "../Home/Home"
 import "./App.css" 
 import ProductGrid from "../ProductGrid/ProductGrid"
+import Categories from "../Categories/Categories"
+import Search from "../Search/Search"
+import About from "../About Us/About Us"
+import Contact from "../Contact Us/Contact Us"
+import Footer from "../Footer/Footer"
+import {BrowserRouter, Routes, Route } from "react-router-dom"
+import ProductDetails from "../ProductDetails/ProductDetails"
+import Banner from "../Banner/Banner"
 
 
 export default function App() {
@@ -14,7 +22,9 @@ export default function App() {
   //       <main>
   //         {function Home() {
   const [products, setProducts] = React.useState([]);
-   
+  const [filteredProducts,setFilteredProducts]= React.useState ([])
+  const [selectedCategory, setSelectedCategory] = React.useState("All categories");
+
   React.useEffect(() => {
     // const fetchProducts = async () => {
       // .then((response) => setProducts(response))
@@ -27,6 +37,7 @@ export default function App() {
           const response = await fetch('https://codepath-store-api.herokuapp.com/store');
           const data = await response.json();
           setProducts(data.products);
+          setFilteredProducts(data.products);
           console.log(data);
         } catch (error) {
           console.error("Error fetching products:", error);
@@ -36,6 +47,43 @@ export default function App() {
       fetchProducts();
     }, [] );
 
+    const handleSearch = (searchTerm) => {
+      // Filter the products based on the search term
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      // Update the filtered products state
+      setFilteredProducts(filteredProducts);
+    };
+
+    //    const handleSelectCategory = (category) => {
+    // setSelectedCategory(category);
+  // };
+
+  // const filteredProducts = selectedCategory === "All categories"
+  //   ? products
+  //   : products.filter((product) => product.category === selectedCategory);
+  const handleSelectCategory = (category) => {
+    setSelectedCategory(category);
+    if (category === "All categories") {
+      setFilteredProducts(products);
+    } else {
+     const filteredProducts = products.filter(
+        (product) => {
+          return (product.category === category.toLowerCase())
+        });
+      console.log("filtered products: ", filteredProducts)
+      setFilteredProducts(filteredProducts);
+    }
+  };
+
+// Concepts
+
+// 1. Components and Props
+//    Beware of matching keys in props
+
+// 2. Javascript object destructuring
+    
   return (
     <div className="app">
       <BrowserRouter>
@@ -43,40 +91,42 @@ export default function App() {
           <Navbar />
           <Sidebar />
           <Home />
-          <ProductGrid products={products}/> 
-          
+          <Categories selectCategory={handleSelectCategory} />
+          <Search onSearch={handleSearch}/>
+          <Routes>
+            <Route path = "/" element = {<ProductGrid products= {filteredProducts} /> } /> 
+            <Route path = "/product/:id" element = {<ProductDetails/>} />
+          </Routes>
+           <About/>
+           <Contact/> 
+          <Footer/>
         </main>
+
+        
       </BrowserRouter>
     </div>
   );
 }
 
-// import "./ProductCard.css"
+// return (
+//   <div className="app">
+//     <BrowserRouter>
+//       {/* <main>
+//         <Navbar />
+//         <Sidebar />
+//         <Home />
+//         <Categories selectCategory={handleSelectCategory} />
+//         <Search onSearch={handleSearch}/>
+//         <ProductGrid products={filteredProducts}/> 
+//          <About/>
+//          <Contact/> 
+//         <Footer/>
+//       </main> */}
 
-// export default function ProductCard ({ product }){
-//     return (
-//         <div className="product-card">          
-//             {/* Switch line 7 to an img element.Dont forget the src and alt data. */}
-//         {/* <img src={product.image} alt={product.name}/> */}
-//         <h4> {product.name} </h4>
-//         <div>{price}</div>
-//         <div>{category}</div>
-//         </div>
-//     )
-// }
-
-// img, name ,price,category 
-
-// import * as React from "react"
-// import "./ProductGrid.css" 
-// import ProductCard from "../productCard/productCard"
-
-// export default function ProductGrid({ products }) {
-//     return (
-//         <div className="ProductGrid" >
-//             {products.map((product) => (
-//                 <ProductCard key = { product.id} product = {product}/>
-//                 ))}
-//         </div>
-//     );
-// };
+//       <Routes>
+//         <Route path = "/" element = {<ProductGrid products= {products} /> } /> 
+//         <Route path = "/product/:id" element = {<ProductDetails/>} />
+//       </Routes>
+//     </BrowserRouter>
+//   </div>
+// );
