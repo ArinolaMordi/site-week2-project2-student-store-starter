@@ -1,74 +1,55 @@
 import React from "react"
-// import { BrowserRouter } from 'react-router-dom'
 import Navbar from "../Navbar/Navbar"
-import Sidebar from "../Sidebar/Sidebar"
 import Home from "../Home/Home"
-import "./App.css" 
+import "./App.css"
 import ProductGrid from "../ProductGrid/ProductGrid"
 import Categories from "../Categories/Categories"
 import Search from "../Search/Search"
 import About from "../About Us/About Us"
 import Contact from "../Contact Us/Contact Us"
 import Footer from "../Footer/Footer"
-import {BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import ProductDetails from "../ProductDetails/ProductDetails"
-import Banner from "../Banner/Banner"
+
 
 
 export default function App() {
-  // return (
-  //   <div className="app">
-  //     <BrowserRouter>
-  //       <main>
-  //         {function Home() {
   const [products, setProducts] = React.useState([]);
-  const [filteredProducts,setFilteredProducts]= React.useState ([])
+  const [filteredProducts, setFilteredProducts] = React.useState([])
   const [selectedCategory, setSelectedCategory] = React.useState("All categories");
 
   React.useEffect(() => {
-    // const fetchProducts = async () => {
-      // .then((response) => setProducts(response))
-      // .catch((error) => console.log(error));
-      // }, []);
+    const fetchProducts = async () => {
+      try {
 
-      // Function to fetch the products from the API
-      const fetchProducts = async () => {
-        try {
-          const response = await fetch('https://codepath-store-api.herokuapp.com/store');
-          const data = await response.json();
-          setProducts(data.products);
-          setFilteredProducts(data.products);
-          console.log(data);
-        } catch (error) {
-          console.error("Error fetching products:", error);
-        }
-      };
-
-      fetchProducts();
-    }, [] );
-
-    const handleSearch = (searchTerm) => {
-      // Filter the products based on the search term
-      const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      // Update the filtered products state
-      setFilteredProducts(filteredProducts);
+        const response = await fetch('https://codepath-store-api.herokuapp.com/store');
+        const data = await response.json();
+        setProducts(data.products);
+        setFilteredProducts(data.products);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
 
-    //    const handleSelectCategory = (category) => {
-    // setSelectedCategory(category);
-  // };
+    fetchProducts();
+  }, []);
 
-  // const filteredProducts = selectedCategory === "All categories"
-  //   ? products
-  //   : products.filter((product) => product.category === selectedCategory);
+  const handleSearch = (searchTerm) => {
+    // Filter the products based on the search term
+    const filteredProducts = products.filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    // Update the filtered products state
+    setFilteredProducts(filteredProducts);
+  };
+
   const handleSelectCategory = (category) => {
     setSelectedCategory(category);
     if (category === "All categories") {
       setFilteredProducts(products);
     } else {
-     const filteredProducts = products.filter(
+      const filteredProducts = products.filter(
         (product) => {
           return (product.category === category.toLowerCase())
         });
@@ -77,56 +58,28 @@ export default function App() {
     }
   };
 
-// Concepts
-
-// 1. Components and Props
-//    Beware of matching keys in props
-
-// 2. Javascript object destructuring
-    
   return (
     <div className="app">
       <BrowserRouter>
         <main>
           <Navbar />
-          <Sidebar />
           <Home />
           <Categories selectCategory={handleSelectCategory} />
-          <Search onSearch={handleSearch}/>
+          <Search onSearch={handleSearch} />
+
           <Routes>
-            <Route path = "/" element = {<ProductGrid products= {filteredProducts} /> } /> 
-            <Route path = "/product/:id" element = {<ProductDetails/>} />
+            <Route path="/" element={<ProductGrid products={filteredProducts} />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
           </Routes>
-           <About/>
-           <Contact/> 
-          <Footer/>
+
+          <About />
+          <Contact />
+          <Footer />
         </main>
 
-        
+
       </BrowserRouter>
     </div>
   );
 }
 
-// return (
-//   <div className="app">
-//     <BrowserRouter>
-//       {/* <main>
-//         <Navbar />
-//         <Sidebar />
-//         <Home />
-//         <Categories selectCategory={handleSelectCategory} />
-//         <Search onSearch={handleSearch}/>
-//         <ProductGrid products={filteredProducts}/> 
-//          <About/>
-//          <Contact/> 
-//         <Footer/>
-//       </main> */}
-
-//       <Routes>
-//         <Route path = "/" element = {<ProductGrid products= {products} /> } /> 
-//         <Route path = "/product/:id" element = {<ProductDetails/>} />
-//       </Routes>
-//     </BrowserRouter>
-//   </div>
-// );

@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   background-color: #00c385;
-  margin-left: 200px; 
+  margin-left: 200px;
 }
 
 .welcomeText {
@@ -15,6 +15,7 @@
   margin-bottom: 20px;
 
 }
+
 .findYourMerch {
   color: white;
   font-size: 40px;
@@ -22,16 +23,16 @@
   margin-left: 70px;
   margin-bottom: 20px;
 }
+
 .allKindOfGoodies {
   color: white;
   font-size: 18px;
   margin-left: 70px;
 }
-/* .textBox {
-  
+
+.heroImg {
+  height: 200px;
+  width: 300px;
+  margin-left: 900px;
+  margin-top: 40px;
 }
-.searchBtn {
-  margin: 50px;
-  width: 40px;
-  height: 50px; */
-/* } */

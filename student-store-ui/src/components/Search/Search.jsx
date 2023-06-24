@@ -21,7 +21,7 @@ export default function Search({ onSearch }) {
           placeholder="Search for products"
           value={searchTerm}
           onChange={handleChange}
-         
+
         />
         <button type="submit">Search</button>
       </form>
