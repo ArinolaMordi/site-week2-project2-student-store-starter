@@ -1,4 +1,4 @@
-.banner {
+.banner         {
   width: 1200px;
   height: 450px;
   display: flex;
@@ -7,7 +7,7 @@
   margin-left: 200px;
 }
 
-.welcomeText {
+.welcomeText    {
   font-size: 50px;
   font-weight: bold;
   color: white;
@@ -16,7 +16,7 @@
 
 }
 
-.findYourMerch {
+.findYourMerch   {
   color: white;
   font-size: 40px;
   font-weight: bold;
@@ -30,7 +30,7 @@
   margin-left: 70px;
 }
 
-.heroImg {
+.heroImg          {
   height: 200px;
   width: 300px;
   margin-left: 900px;
