@@ -53,7 +53,7 @@ export default function App() {
         (product) => {
           return (product.category === category.toLowerCase())
         });
-      console.log("filtered products: ", filteredProducts)
+      
       setFilteredProducts(filteredProducts);
     }
   };

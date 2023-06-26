@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import ProductCard from "../ProductCard/ProductCard"
 export default function ProductDetails() {
   const { id } = useParams();
-  console.log(id);
+  
   const [product, setProduct] = useState({});
 
   const url = `https://codepath-store-api.herokuapp.com/store/${id}`;
