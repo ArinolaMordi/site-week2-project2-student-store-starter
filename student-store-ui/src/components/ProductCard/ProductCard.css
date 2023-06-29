@@ -3,6 +3,10 @@
   padding: 10px;
   text-align: center;
   width: 200px;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  
 }
 
 .productCard {

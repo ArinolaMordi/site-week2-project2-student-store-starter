@@ -1,9 +1,11 @@
 import React from "react"
 import "./ProductCard.css"
+import PlusMinusButton from "../PlusMinusButton/PlusMinusButton"
 
 
-export default function ProductCard(props) {
-  const product = props["product"]
+export default function ProductCard({
+  product,productId,handleAddItemToCart,handleRemoveItemFromCart
+}) {
 
   return (
     <div className="productCard">
@@ -12,8 +14,13 @@ export default function ProductCard(props) {
       <h4> {product.name} </h4>
       <div> $ {product.price}</div>
       <div>{product.category}</div>
+      <PlusMinusButton  productId={productId} handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart}/>
+      
+      
 
+    
     </div>
   )
 }
+
 

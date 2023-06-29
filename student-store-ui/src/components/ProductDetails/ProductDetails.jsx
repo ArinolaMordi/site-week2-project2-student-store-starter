@@ -21,6 +21,9 @@ export default function ProductDetails() {
     fetchProducts();
   }, [])
   return (
-    <ProductCard product={product} />
+    <div className="product-details">
+      <ProductCard product={product} />
+    </div>
+    
   )
 }

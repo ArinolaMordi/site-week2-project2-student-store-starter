@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import Navbar from "../Navbar/Navbar"
 import Home from "../Home/Home"
 import "./App.css"
@@ -10,14 +10,44 @@ import Contact from "../Contact Us/Contact Us"
 import Footer from "../Footer/Footer"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import ProductDetails from "../ProductDetails/ProductDetails"
-
+import SideBar from "../SideBar/SideBar"
 
 
 export default function App() {
   const [products, setProducts] = React.useState([]);
   const [filteredProducts, setFilteredProducts] = React.useState([])
   const [selectedCategory, setSelectedCategory] = React.useState("All categories");
+  const [isOpen, setIsOpen] = useState(false);
+  const [shoppingCart, setShoppingCart] = useState([])
 
+  const handleAddItemToCart = (productId) => {
+    let isProductInCart = false;
+    const newShoppingCart = shoppingCart.map((item) => {
+      if (item && item.itemId === productId){
+        isProductInCart = true;
+        item.quantity += 1;
+      }
+      return item;
+    });
+    if (isProductInCart) {
+      setShoppingCart(newShoppingCart);
+    } else {
+      setShoppingCart([...shoppingCart, { itemId: productId, quantity: 1 }]);
+    }
+    console.log("!!!", shoppingCart);
+  };
+
+  const handleRemoveItemFromCart = (productId) => {
+    const newShoppingCart = shoppingCart.map((item) => {
+      if (item.itemId === productId) {
+        item.quantity -= 1;
+      }
+      return item;
+    });
+    console.log("!!", shoppingCart);
+    setShoppingCart(newShoppingCart.filter((item) => item.quantity !== 0));
+  };
+  
   React.useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -32,8 +62,12 @@ export default function App() {
       }
     };
 
-    fetchProducts();
+    fetchProducts(); 
   }, []);
+
+  const handleOnToggle = () => {
+    setIsOpen(!isOpen);
+  }
 
   const handleSearch = (searchTerm) => {
     // Filter the products based on the search term
@@ -57,27 +91,32 @@ export default function App() {
       setFilteredProducts(filteredProducts);
     }
   };
-
   return (
     <div className="app">
       <BrowserRouter>
         <main>
+          
           <Navbar />
+          <SideBar 
+            isOpen={isOpen} 
+            handleOnToggle={handleOnToggle}
+            products={products}
+            shoppingCart={shoppingCart}
+          />
           <Home />
           <Categories selectCategory={handleSelectCategory} />
           <Search onSearch={handleSearch} />
 
           <Routes>
-            <Route path="/" element={<ProductGrid products={filteredProducts} />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-          </Routes>
+            <Route path="/" element={<ProductGrid products={filteredProducts} handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart}/>} />
+            <Route path="/product/:id" element={<ProductDetails  />} /> 
+         </Routes>
+
 
           <About />
           <Contact />
           <Footer />
         </main>
-
-
       </BrowserRouter>
     </div>
   );

@@ -9,6 +9,7 @@ export default function Home() {
       <div className="allKindOfGoodies">We have all kinds of goodies. Click on any of the items to start
         filling up your shopping cart. Checkout whenever you're ready.
       </div>
+      
       <img src="../student_store_icon.18e5d61a.svg" alt="hero" class="heroImg"/>
     </div>
   )

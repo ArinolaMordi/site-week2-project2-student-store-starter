@@ -1,0 +1,30 @@
+/* .SideBarCss {
+    background-color: #2c4047;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    overflow-x: hidden;
+    border-radius: solid white;
+  } */
+  .sidebar{
+    background-color:#2c4047;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    overflow-x: hidden;
+    border-radius: solid white;
+    border-style: solid;
+    border-right-color: white;
+    border-top:none;
+   
+  }
+  .sidebar > .sidebar-close{
+    width: 75px;
+  }
+  .sidebar> .sidebar-open {
+    width: 550px;
+  }
