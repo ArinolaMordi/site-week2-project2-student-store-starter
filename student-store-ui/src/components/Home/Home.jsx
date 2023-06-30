@@ -10,7 +10,7 @@ export default function Home() {
         filling up your shopping cart. Checkout whenever you're ready.
       </div>
       
-      <img src="../student_store_icon.18e5d61a.svg" alt="hero" class="heroImg"/>
+      <img src="../student_store_icon.18e5d61a.svg" alt="hero" className="heroImg"/>
     </div>
   )
 }

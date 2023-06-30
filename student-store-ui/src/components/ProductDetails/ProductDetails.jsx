@@ -3,7 +3,8 @@ import "./ProductDetails.css"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import ProductCard from "../ProductCard/ProductCard"
-export default function ProductDetails() {
+export default function ProductDetails({handleAddItemToCart , handleRemoveItemFromCart}) { 
+ 
   const { id } = useParams();
   
   const [product, setProduct] = useState({});
@@ -22,7 +23,7 @@ export default function ProductDetails() {
   }, [])
   return (
     <div className="product-details">
-      <ProductCard product={product} />
+      <ProductCard product={product} handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart} />
     </div>
     
   )

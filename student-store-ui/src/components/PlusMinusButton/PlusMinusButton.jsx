@@ -1,31 +1,31 @@
 import React from "react";
 import { useEffect, useState } from "react" ; 
-function CounterButton ({
-    product,
+function PlusMinusButton ({
+    // product,
     productId,
     handleAddItemToCart,
     handleRemoveItemFromCart
-
 }) {
 const [count, setCount] = useState(0);
 
 const handleClick = () => { 
-    handleAddItemToCart(productId)
+    
     setCount ((prevCount) => prevCount +1); 
 };
 const handleDecrement = () => {
-    handleRemoveItemFromCart(productId)
+    
     setCount ((prevCount) => prevCount -1);
 } ; 
  useEffect (() => {
  }, [count]);
 
+//  console.log("fn",handleAddItemToCart);
  return (
     <div className="Buttons"> 
-    <button className="add" onClick={() =>  {handleClick()}}>
+    <button className="add" onClick={() =>  {handleClick(); handleAddItemToCart(productId)}}>
         <div className="plusIcon">+</div>
     </button>
-    <button className="remove" onClick={() =>  {handleDecrement()}} >
+    <button className="remove" onClick={() =>  {handleDecrement(); handleRemoveItemFromCart(productId)}} >
         <div className="minusIcon"> - </div>
     </button>
     <p className="amount">
@@ -34,4 +34,4 @@ const handleDecrement = () => {
     </div>
  );
  }
- export default CounterButton ; 
+ export default PlusMinusButton ; 

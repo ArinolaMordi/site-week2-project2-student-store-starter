@@ -28,3 +28,19 @@
   .sidebar> .sidebar-open {
     width: 550px;
   }
+  .shoppingcart {
+   font-size: 30px;
+   color: white;
+  }
+.monetization {
+color: white;
+}
+.name {
+  font-size: 15px;
+}
+.email{
+  font-size: 15px;
+}
+.factCheck{
+  color: white;
+}

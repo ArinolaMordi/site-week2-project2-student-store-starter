@@ -109,7 +109,7 @@ export default function App() {
 
           <Routes>
             <Route path="/" element={<ProductGrid products={filteredProducts} handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart}/>} />
-            <Route path="/product/:id" element={<ProductDetails  />} /> 
+            <Route path="/product/:id" element={<ProductDetails handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart}/>}  /> 
          </Routes>
 
 
