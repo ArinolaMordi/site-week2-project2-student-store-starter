@@ -1,7 +1,25 @@
 .codePathImage {
-    margin-left: 1200px;
+    margin-left: 900px;
+
 }
 
-.aboutBody     {
+.aboutBody {
     justify-content: center;
+
+}
+
+.About {
+    position: relative;
+}
+
+.aboutBody {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 70px;
+    margin-right: 700px;
+}
+
+.AboutLetter {
+    margin-left: 70px;
 }

@@ -1,3 +1,13 @@
 .contactUs {
     background-color: grey;
+    display: flex;
 }
+.contactUsInfo{
+    display: flex;
+}
+.contactUsInfo {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+  }
+  

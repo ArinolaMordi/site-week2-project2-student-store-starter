@@ -1,6 +1,7 @@
 import * as React from 'react';
 import "./ShoppingCart.css";
 import App from '../App/App';
+import Checkout from '../Checkout/Checkout';
 
 
 export default function ShoppingCart(props) {
@@ -78,5 +79,4 @@ export default function ShoppingCart(props) {
 
 
 }
-
 

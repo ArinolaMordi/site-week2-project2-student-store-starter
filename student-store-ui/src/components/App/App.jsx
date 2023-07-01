@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import Navbar from "../Navbar/Navbar"
 import Home from "../Home/Home"
 import "./App.css"
@@ -23,7 +23,7 @@ export default function App() {
   const handleAddItemToCart = (productId) => {
     let isProductInCart = false;
     const newShoppingCart = shoppingCart.map((item) => {
-      if (item && item.itemId === productId){
+      if (item && item.itemId === productId) {
         isProductInCart = true;
         item.quantity += 1;
       }
@@ -47,7 +47,7 @@ export default function App() {
     console.log("!!", shoppingCart);
     setShoppingCart(newShoppingCart.filter((item) => item.quantity !== 0));
   };
-  
+
   React.useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -62,7 +62,7 @@ export default function App() {
       }
     };
 
-    fetchProducts(); 
+    fetchProducts();
   }, []);
 
   const handleOnToggle = () => {
@@ -87,7 +87,7 @@ export default function App() {
         (product) => {
           return (product.category === category.toLowerCase())
         });
-      
+
       setFilteredProducts(filteredProducts);
     }
   };
@@ -95,22 +95,23 @@ export default function App() {
     <div className="app">
       <BrowserRouter>
         <main>
-          
+
           <Navbar />
-          <SideBar 
-            isOpen={isOpen} 
+          <SideBar
+            isOpen={isOpen}
             handleOnToggle={handleOnToggle}
             products={products}
             shoppingCart={shoppingCart}
+
           />
           <Home />
           <Categories selectCategory={handleSelectCategory} />
           <Search onSearch={handleSearch} />
 
           <Routes>
-            <Route path="/" element={<ProductGrid products={filteredProducts} handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart}/>} />
-            <Route path="/product/:id" element={<ProductDetails handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart}/>}  /> 
-         </Routes>
+            <Route path="/" element={<ProductGrid products={filteredProducts} handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart} />} />
+            <Route path="/product/:id" element={<ProductDetails handleAddItemToCart={handleAddItemToCart} handleRemoveItemFromCart={handleRemoveItemFromCart} />} />
+          </Routes>
 
 
           <About />
@@ -121,4 +122,3 @@ export default function App() {
     </div>
   );
 }
-
